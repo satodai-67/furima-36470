@@ -36,9 +36,9 @@ Things you may want to cover:
 | last_name          | string | null: false               |
 | firstkana_name     | string | null: false               |
 | lastkana_name      | string | null: false               |
-| birth_year         | string | null: false               |
-| birth_month        | string | null: false               |
-| birth_day          | string | null: false               |
+| birth_year         | date   | null: false               |
+| birth_month        | date   | null: false               |
+| birth_day          | date   | null: false               |
 
 ### Association
 
@@ -50,12 +50,12 @@ Things you may want to cover:
 | ---------------- | ---------- | ------------------------------ |
 | item_name        | string     | null: false                    |
 | item_explanation | text       | null: false                    |
-| category         | string     | null: false                    |
-| state            | string     | null: false                    |
-| shipping_fee     | string     | null: false                    |
-| prefecture       | string     | null: false                    |
-| shipping_day     | string     | null: false                    |
-| price            | string     | null: false                    |
+| category_id      | integer    | null: false                    |
+| state_id         | integer    | null: false                    |
+| shipping_fee_id  | integer    | null: false                    |
+| prefecture_id    | integer    | null: false                    |
+| shipping_day_id  | integer    | null: false                    |
+| price            | integer     | null: false                    |
 | user             | references | null: false, foreign_key: true |
 
 ### Association
@@ -79,12 +79,12 @@ Things you may want to cover:
 | Column         | Type       | Options                        |
 | -------------- | ---------- | ------------------------------ |
 | postal_code    | string     | null: false                    |
-| prefecture     | string     | null: false                    |
+| prefecture_id  | integer     | null: false                    |
 | municipalities | string     | null: false                    |
 | house_number   | string     | null: false                    |
 | building_name  | string     |                                |
 | phone_number   | string     | null: false                    |
-| purchases      | references | null: false, foreign_key: true |
+| purchase       | references | null: false, foreign_key: true |
 
 ### Association
 
