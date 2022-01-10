@@ -36,9 +36,8 @@ Things you may want to cover:
 | last_name          | string | null: false               |
 | firstkana_name     | string | null: false               |
 | lastkana_name      | string | null: false               |
-| birth_year         | date   | null: false               |
-| birth_month        | date   | null: false               |
-| birth_day          | date   | null: false               |
+| birth_date         | date   | null: false               |
+
 
 ### Association
 
