@@ -54,7 +54,7 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
       end
-      it 'phone_numbergが12桁以上では購入できない' do
+      it 'phone_numberが12桁以上では購入できない' do
         @purchase_address.phone_number = '1234567891234'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
