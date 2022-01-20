@@ -4,7 +4,8 @@ RSpec.describe PurchaseAddress, type: :model do
   describe '商品購入機能' do
     before do
       user = FactoryBot.create(:user)
-      @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id)
+      item = FactoryBot.create(:item)
+      @purchase_address = FactoryBot.build(:purchase_address, user_id: user.id, item_id: item.id)
     end
 
     context '商品が購入できるとき' do
@@ -43,10 +44,25 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("House number can't be blank")
       end
-      it 'phone_numberが空だと登録できない' do
+      it 'phone_numberが空だと購入できない' do
         @purchase_address.phone_number = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it 'phone_numberが9桁以下だと購入できない' do
+        @purchase_address.phone_number = '12345678'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'phone_numbergが12桁以上では購入できない' do
+        @purchase_address.phone_number = '1234567891234'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
+      end
+      it 'phone_numberに半角英数字以外が含まれている場合は購入できない' do
+        @purchase_address.phone_number = 'ＡＢｃ１２３32423'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid.")
       end
       it 'tokenが空だと購入できない' do
         @purchase_address.token = ''
@@ -57,6 +73,11 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.user_id = nil
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'itemが紐づいていないと購入できない' do
+        @purchase_address.item_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
