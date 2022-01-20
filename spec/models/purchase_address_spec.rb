@@ -13,7 +13,7 @@ RSpec.describe PurchaseAddress, type: :model do
       end
       it 'building_nameが空でも購入できる' do
         @purchase_address.building_name = ''
-        expect(@purchase_address).to be_valid 
+        expect(@purchase_address).to be_valid
       end
     end
 
@@ -34,7 +34,7 @@ RSpec.describe PurchaseAddress, type: :model do
         expect(@purchase_address.errors.full_messages).to include("Prefecture can't be blank")
       end
       it 'municipalitiesが空だと購入できない' do
-        @purchase_address.municipalities = '' 
+        @purchase_address.municipalities = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Municipalities can't be blank")
       end
@@ -48,10 +48,15 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
       end
+      it 'tokenが空だと購入できない' do
+        @purchase_address.token = ''
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
+      end
       it 'userが紐づいていないと購入できない' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include ("User can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
       end
     end
   end
